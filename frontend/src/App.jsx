@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
+
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -15,34 +16,104 @@ import Profil from './pages/Profil'
 import DashboardAdmin from './pages/DashboardAdmin'
 
 export default function App() {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar />
+return (
+<div
+style={{
+display: 'flex',
+flexDirection: 'column',
+minHeight: '100vh'
+}}
+> <Navbar />
 
-      <main style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Accueil />} />
-          <Route path="/connexion" element={<Connexion />} />
-          <Route path="/inscription" element={<Inscription />} />
-          <Route path="/sites" element={<SitesTouristiques />} />
-          <Route path="/carte" element={<Carte />} />
-          <Route path="/sites/:id" element={<DetailSite />} />
+```
+  <main style={{ flex: 1 }}>
+    <Routes>
 
-          <Route path="/favoris" element={
-            <ProtectedRoute><Favoris /></ProtectedRoute>
-          } />
-          <Route path="/profil" element={
-            <ProtectedRoute><Profil /></ProtectedRoute>
-          } />
-          <Route path="/admin" element={
-            <AdminRoute><DashboardAdmin /></AdminRoute>
-          } />
+      {/* Redirection vers connexion */}
+      <Route
+        path="/"
+        element={<Navigate to="/connexion" replace />}
+      />
 
-          <Route path="*" element={<Accueil />} />
-        </Routes>
-      </main>
+      {/* Pages publiques */}
+      <Route path="/connexion" element={<Connexion />} />
+      <Route path="/inscription" element={<Inscription />} />
 
-      <Footer />
-    </div>
-  )
+      {/* Pages protégées */}
+      <Route
+        path="/accueil"
+        element={
+          <ProtectedRoute>
+            <Accueil />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/sites"
+        element={
+          <ProtectedRoute>
+            <SitesTouristiques />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/carte"
+        element={
+          <ProtectedRoute>
+            <Carte />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/sites/:id"
+        element={
+          <ProtectedRoute>
+            <DetailSite />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/favoris"
+        element={
+          <ProtectedRoute>
+            <Favoris />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/profil"
+        element={
+          <ProtectedRoute>
+            <Profil />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <DashboardAdmin />
+          </AdminRoute>
+        }
+      />
+
+      {/* Route inconnue */}
+      <Route
+        path="*"
+        element={<Navigate to="/connexion" replace />}
+      />
+
+    </Routes>
+  </main>
+
+  <Footer />
+</div>
+
+)
 }
