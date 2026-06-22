@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container">
         <p style={{ margin: 0 }}>
-          Diary Madagascar — projet académique L3 Informatique, Systèmes &amp; Réseaux. Données fournies à titre pédagogique.
+          Diary Madagascar — projet académique  Informatique .Données fournies à titre pédagogique.
         </p>
       </div>
     </footer>
